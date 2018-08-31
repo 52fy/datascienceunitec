@@ -1,18 +1,24 @@
-Pollutantmean <-function(directory,pollutant,id = 1:332){
-  x <- directory
+#Get mean of the pollutant across all of the monitors, ignoring any missing values coded
 
-  y <-paste("~",x,sep = "/")
+pollutantmean <-function(directory,pollutant,id = 1:332){
+ 
+  # #set up working directory (for mac) ,becase setwd() cannot runn twice
+   x <- directory
+   y <-paste("~",x,sep = "/")
   setwd(y)
   z <-list.files(,full.names = F)
+  
+  #create a data frame
   frame <-data.frame()
+  #combine dataframe of specified csv
   for (i in id) {
-    frame <- rbind(frame,read.csv(z[i]))
+    m <-read.csv(z[i])
+    frame <- rbind(frame,m)
   }
   
+    #calculate the value of mean
     if (pollutant == "sulfate")
-      print(mean(frame$sulfate,na.rm = T))
+      print((mean(frame$sulfate,na.rm = T)))
     else if (pollutant == "nitrate")
-      print(mean(frame$nitrate,na.rm = T))
-
-  
+      print((mean(frame$nitrate,na.rm = T)))
 }
