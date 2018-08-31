@@ -1,0 +1,34 @@
+#eturns a vector of those pollutants values are greater than 'p', across a specified list of monitors
+
+pollutantvector <- function(directory, pollutant, id=1:332, p){
+  
+  #set up working directory (for mac) ,becase setwd() cannot runn twice
+  x <- directory
+  y <-paste("~",x,sep = "/")
+  setwd(y)
+  z <-list.files(,full.names = F)
+  #creat a verctor
+  vect <- numeric(0)
+  
+  for(i in id){
+    
+    #read specified files
+    m <-read.csv(z[i])
+    
+     #define which data need to be processed 
+    if(pollutant == "sulfate"){
+      pollutant_value <- m$sulfate
+    }
+    else if(pollutant == "nitrate"){
+      pollutant_value <- m$nitrate
+    }
+    
+    #find the value is greater than P 
+    result <-pollutant_value[pollutant_value >p]
+    
+    #remove NA values and merge to data frame
+    n <- is.na(result) 
+    vect <- c(vect, result[!n])
+  }
+  print(vect)
+}
