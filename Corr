@@ -1,0 +1,23 @@
+#Calculate the correlation between sulfate and nitrate for monitor locations
+corr <- function(directory,threshold = 0){
+  
+  #set up working directory (for mac) ,becase setwd() cannot runn twice
+   x <- directory              #
+   y <-paste("~",x,sep = "/")
+   setwd(y)
+   #Create file list and a vector
+   z <-list.files(,full.names = F)
+   vect <-numeric()
+  
+  for (i in 1:length(z)){
+    
+    #read specified files 
+    m <-read.csv(z[i])
+    #count complete case
+    n <-sum(complete.cases(m))
+    #Calculate correlation
+    if (n > threshold)
+      vect <-append(vect,cor(m$sulfate,m$nitrate,use ="complete.obs"))
+  }
+  vect
+}
