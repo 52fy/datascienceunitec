@@ -93,8 +93,7 @@ calculator <- function(){
   else
   {
   }
-}  
-  
+} 
   
   
 
