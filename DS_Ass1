@@ -1,4 +1,6 @@
 ##Part-1
+setwd("/users/zhaoqiang")
+
 source("pollutantmean.r")
 
 pollutantmean("specdata", "sulfate", 1:10)
