@@ -1,0 +1,23 @@
+#read file
+setwd("~/Documents/100_Work_Test/09_PGD/18_Data_s/exe2")
+file <-read.csv("dataset.csv")  
+
+#create data fame for specified data 
+df <-data.frame(file$Global_active_power,file$Sub_metering_2)
+#filter data based on diff condition
+df1<-subset(df,file$Sub_metering_2 == 0)
+df2<-subset(df,file$Sub_metering_2 == 1)
+df3 <-subset(df,file$Sub_metering_2 == 2)
+
+#set plot type and margin 
+par(mfrow =c(3,1),mar=c(4,4,7,1))
+#draw 1st histogram
+hist(df1$file.Global_active_power,col ="red",main = "Global Active Power for Sub_metering_2 = 0.000",xlab = "Global Active Power(killowatts)")
+#draw 2nd histogram
+hist(df2$file.Global_active_power,col ="red",main = "Global Active Power for Sub_metering_2 = 1.000",xlab = "Global Active Power(killowatts)")
+#draw 3rd histogram
+hist(df3$file.Global_active_power,col ="red",main = "Global Active Power for Sub_metering_2 = 2.000",xlab = "Global Active Power(killowatts)")
+
+#create PNG
+dev.copy(png,file = "plot4.png")
+dev.off()
