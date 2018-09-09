@@ -1,0 +1,19 @@
+#read files
+library(datasets)
+setwd("~/Documents/100_Work_Test/09_PGD/18_Data_s/exe2")
+x <-read.csv("dataset.csv")
+
+ 
+#draw plot  
+plot(x$Voltage[x$Voltage>=249 & x$Voltage< 250],x$Global_active_power[x$Voltage>=249 & x$Voltage< 250],xlab = "Voltage",ylab = "Global Active Power",xlim = c(249,251.8),main = "Global Active Power(Kilowatts) for Voltage >= 249")  
+
+#highlight speicified data with red
+points(x$Voltage[x$Voltage>= 250],x$Global_active_power[x$Voltage >=250],col = "red")  
+ 
+#draw legend
+legend("topright",pch = 1,legend = c("Voltage >= 249& <250","Voltage >= 250"),col =c("Black","red"))
+
+
+#create PNG
+dev.copy(png,file = "plot3.png")
+dev.off()
