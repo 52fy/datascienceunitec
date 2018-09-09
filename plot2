@@ -1,0 +1,15 @@
+#read files
+setwd("~/Documents/100_Work_Test/09_PGD/18_Data_s/exe2")
+x <-read.csv("dataset.csv")
+
+#pickup data and create dataframe
+df <-data.frame(x$Global_active_power,x$Voltage)
+new <-subset(df,df$x.Voltage == 237)
+new1 <-new$x.Global_active_power
+
+
+boxplot(new1,col = "red",main = "Global Active Power(Kilowatts) for Voltage 237",xlab = "Voltage 237")
+
+##export PNG
+dev.copy(png,file = "plot2.png")
+dev.off()
